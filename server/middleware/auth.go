@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"go-chat/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,8 +10,15 @@ import (
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.GetHeader("Authorization")
-		if token != "secret-token" {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+		if token == "" {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Authorization header is missing"})
+			c.Abort()
+			return
+		}
+		_, err := utils.ValidateToken(token)
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid or expired token"})
+			c.Abort()
 			return
 		}
 		c.Next()

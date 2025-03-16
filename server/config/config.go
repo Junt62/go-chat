@@ -14,10 +14,11 @@ type Config struct {
 	DBUser     string
 	DBPassword string
 	DBName     string
+	WebAddress string
 }
 
 func LoadConfig() Config {
-	err := godotenv.Load("config/config.env")
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -28,6 +29,7 @@ func LoadConfig() Config {
 		DBUser:     os.Getenv("DB_USER"),
 		DBPassword: os.Getenv("DB_PASSWORLD"),
 		DBName:     os.Getenv("DB_NAME"),
+		WebAddress: os.Getenv("WEB_ADDRESS"),
 	}
 
 	fmt.Println("Database config loaded: ", cfg.DBHost+":"+cfg.DBPort)

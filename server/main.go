@@ -3,7 +3,7 @@ package main
 import (
 	"go-chat/config"
 	"go-chat/models"
-	"go-chat/server"
+	"go-chat/router"
 )
 
 func main() {
@@ -11,5 +11,7 @@ func main() {
 
 	models.ConnectDatabase(cfg)
 
-	server.Start()
+	r := router.SetupRouter(cfg)
+
+	r.Run(":8080")
 }
