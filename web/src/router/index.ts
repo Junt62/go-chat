@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
-import ChatRoom from '@/views/ChatRoom.vue'
+import ChatView from '@/views/ChatView.vue'
 import { useUserStore } from '@/stores/user'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
@@ -34,7 +34,7 @@ const router = createRouter({
     {
       path: '/chat',
       name: 'chat',
-      component: ChatRoom,
+      component: ChatView,
       meta: { requiresAuth: true },
     },
   ],

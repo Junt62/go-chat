@@ -15,19 +15,19 @@ func SetupRouter(cfg config.Config) *gin.Engine {
 
 	// r.Use(middleware.LoggerMiddleware())
 
-	r.GET("ping", handler.PingHandler)
+	r.GET("/api/ping", handler.PingHandler)
 
-	r.GET("/user/:id", handler.UserHandler)
+	r.GET("/api/user/:id", handler.UserHandler)
 
-	r.GET("/search", handler.SearchHandler)
+	r.GET("/api/search", handler.SearchHandler)
 
-	r.POST("/register", handler.RegisterHandler)
+	r.POST("/api/register", handler.RegisterHandler)
 
-	r.POST("/login", handler.LoginHandler)
+	r.POST("/api/login", handler.LoginHandler)
 
-	r.POST("/logout", handler.LogoutHandler)
+	r.POST("/api/logout", handler.LogoutHandler)
 
-	r.GET("/protected", middleware.AuthMiddleware(), handler.ProtectedHandler)
+	r.GET("/api/protected", middleware.AuthMiddleware(), handler.ProtectedHandler)
 
 	return r
 }

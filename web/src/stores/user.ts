@@ -6,12 +6,12 @@ export const useUserStore = defineStore('user', {
     username: '',
   }),
   actions: {
-    async setToken(token: string, username: string) {
+    setToken(token: string, username: string) {
       this.token = token
       this.username = username
       localStorage.setItem('token', token)
     },
-    async logout() {
+    clearToken() {
       this.token = ''
       this.username = ''
       localStorage.removeItem('token')

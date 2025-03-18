@@ -4,8 +4,8 @@ import router from '@/router'
 import { ElMessage } from 'element-plus'
 
 const request = axios.create({
-  baseURL: import.meta.env.VITE_SERVER || '',
-  timeout: 5000,
+  baseURL: import.meta.env.VITE_SERVER_ADDRESS || '',
+  timeout: 10000,
 })
 
 request.interceptors.request.use(
@@ -22,16 +22,24 @@ request.interceptors.request.use(
 )
 
 request.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    return response
+  },
   (error) => {
+    if (axios.isAxiosError(error)) {
+      console.log('Error status:', error.response?.status)
+      console.log('Error data:', error.response?.data)
+      console.log('Error headers:', error.response?.headers)
+    }
     if (error.response?.status === 401) {
       const userStore = useUserStore()
       if (userStore.token) {
-        userStore.logout()
+        userStore.clearToken()
         router.push('/login')
-        ElMessage.error('登录过期，请重新登录')
+        ElMessage.error('Session expired, please login again')
       }
     }
+    return Promise.reject(error)
   },
 )
 

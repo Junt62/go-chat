@@ -7,16 +7,16 @@
         </div>
       </template>
 
-      <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="80px">
+      <el-form ref="loginDataRef" :model="loginData" :rules="rules" label-width="80px">
         <el-form-item label="Username" prop="username">
-          <el-input v-model="ruleForm.username" />
+          <el-input v-model="loginData.username" />
         </el-form-item>
         <el-form-item label="Password" prop="password">
-          <el-input v-model="ruleForm.password" type="password" show-password />
+          <el-input v-model="loginData.password" type="password" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleLogin(ruleFormRef)">Sign In</el-button>
-          <el-button type="info" @click="handleToRegister">No account？Sign Up</el-button>
+          <el-button type="primary" @click="handleLogin">Sign In</el-button>
+          <el-button type="info" @click="goToRegister">No account？Sign Up</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -29,21 +29,19 @@ import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import type { FormRules, FormInstance } from 'element-plus'
+import type { LoginData } from '@/api/types'
+import { useAuth } from '@/composables/useAuth'
 
-const userStore = useUserStore()
+const { login } = useAuth()
+
 const router = useRouter()
 
-interface RuleForm {
-  username: string
-  password: string
-}
-
-const ruleFormRef = ref<FormInstance>()
-const ruleForm = reactive<RuleForm>({
+const loginDataRef = ref<FormInstance>()
+const loginData = reactive<LoginData>({
   username: '',
   password: '',
 })
-const rules = reactive<FormRules<RuleForm>>({
+const rules = reactive<FormRules<LoginData>>({
   username: [
     { required: true, message: 'Please enter your username', trigger: 'blur' },
     { min: 3, message: 'Username must be at least 3 characters', trigger: 'blur' },
@@ -54,23 +52,16 @@ const rules = reactive<FormRules<RuleForm>>({
   ],
 })
 
-const handleLogin = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate(async (valid) => {
-    if (valid) {
-      try {
-        await userStore.login(ruleForm.username, ruleForm.password)
-        ElMessage.success('Login successful')
-        router.push('/chat')
-      } catch (error) {
-        ElMessage.error('Incorrect username or password. Please try again.')
-      }
-    } else {
-      ElMessage.error('Please check the form for errors')
-    }
-  })
+const handleLogin = async () => {
+  if (!loginDataRef.value) return
+  try {
+    await loginDataRef.value.validate()
+    await login(loginData)
+  } catch (error) {
+    ElMessage.error('Please correct the errors before submitting')
+  }
 }
-const handleToRegister = async () => {
+const goToRegister = async () => {
   router.push('/register')
 }
 </script>

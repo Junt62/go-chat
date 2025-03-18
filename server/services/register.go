@@ -11,13 +11,18 @@ func Register(username, password, email string) error {
 		return errors.New("email already exists")
 	}
 
+	hashedPassword, err := models.HashPassword(password)
+	if err != nil {
+		return errors.New("hash password error")
+	}
+
 	user := models.User{
 		Username: username,
-		Password: models.HashPassword(password),
+		Password: hashedPassword,
 		Email:    email,
 	}
 
-	err := models.CreateUser(user)
+	err = models.CreateUser(user)
 	if err != nil {
 		return err
 	}

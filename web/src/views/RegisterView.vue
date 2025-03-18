@@ -18,8 +18,8 @@
           <el-input v-model="ruleForm.email" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleRegister(ruleFormRef)">Sign Up</el-button>
-          <el-button type="info" @click="handleToLogin">Have an account？Sign In</el-button>
+          <el-button type="primary" @click="handleRegister">Sign Up</el-button>
+          <el-button type="info" @click="goToLogin">Have an account？Sign In</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -28,26 +28,23 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import type { FormRules, FormInstance } from 'element-plus'
-
-const userStore = useUserStore()
+import type { RegisterData } from '@/api/types'
+import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
-interface RuleForm {
-  username: string
-  password: string
-  email: string
-}
+const { register } = useAuth()
 const ruleFormRef = ref<FormInstance>()
-const ruleForm = reactive<RuleForm>({
+
+const ruleForm = reactive<RegisterData>({
   username: '',
   password: '',
   email: '',
 })
-const rules = reactive<FormRules<RuleForm>>({
+
+const rules = reactive<FormRules<RegisterData>>({
   username: [
     { required: true, message: 'Please input username', trigger: 'blur' },
     { min: 3, message: 'Username must be at least 3 characters', trigger: 'blur' },
@@ -62,23 +59,17 @@ const rules = reactive<FormRules<RuleForm>>({
   ],
 })
 
-const handleRegister = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate(async (valid) => {
-    if (valid) {
-      try {
-        await userStore.register(ruleForm.username, ruleForm.password, ruleForm.email)
-        ElMessage.success('Sign up successful')
-        router.push('/login')
-      } catch (error) {
-        ElMessage.error('Sign up failed, please try again')
-      }
-    } else {
-      ElMessage.error('Please check the form for errors')
-    }
-  })
+const handleRegister = async () => {
+  if (!ruleFormRef.value) return
+  try {
+    await ruleFormRef.value.validate()
+    await register(ruleForm)
+  } catch (error) {
+    ElMessage.error('Please correct the errors before submitting')
+  }
 }
-const handleToLogin = async () => {
+
+const goToLogin = async () => {
   router.push('/login')
 }
 </script>
