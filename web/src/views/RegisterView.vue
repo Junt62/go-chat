@@ -1,5 +1,7 @@
 <template>
   <div class="register-container">
+    <TopBar />
+
     <el-card class="register-card">
       <template #header>
         <div class="card-header">
@@ -33,6 +35,7 @@ import { ElMessage } from 'element-plus'
 import type { FormRules, FormInstance } from 'element-plus'
 import type { RegisterData } from '@/api/types'
 import { useAuth } from '@/composables/useAuth'
+import TopBar from '@/components/TopBar.vue'
 
 const router = useRouter()
 const { register } = useAuth()
@@ -83,6 +86,11 @@ const goToLogin = async () => {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #3a1c71, #d76d77, #c37745);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .register-card {
   width: auto;
