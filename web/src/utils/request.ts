@@ -26,11 +26,6 @@ request.interceptors.response.use(
     return response
   },
   (error) => {
-    if (axios.isAxiosError(error)) {
-      console.log('Error status:', error.response?.status)
-      console.log('Error data:', error.response?.data)
-      console.log('Error headers:', error.response?.headers)
-    }
     if (error.response?.status === 401) {
       const userStore = useUserStore()
       if (userStore.token) {

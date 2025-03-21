@@ -17,7 +17,7 @@
             <el-icon><Check /></el-icon> 端到端加密
           </li>
         </ul>
-        <el-button type="primary" round class="join-btn">立即体验</el-button>
+        <el-button type="primary" round class="join-btn" @click="join">立即体验</el-button>
       </div>
     </div>
   </div>
@@ -25,7 +25,17 @@
 
 <script setup lang="ts">
 import TopBar from '@/components/TopBar.vue'
+import { useAuth } from '@/composables/useAuth'
+import { useUserStore } from '@/stores/user'
 import { ChatDotRound, User, Check } from '@element-plus/icons-vue'
+
+const userStore = useUserStore()
+const { ping } = useAuth()
+
+const join = async () => {
+  // console.log(userStore.token)
+  ping()
+}
 </script>
 
 <style scoped>

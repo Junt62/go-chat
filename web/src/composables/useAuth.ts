@@ -1,4 +1,4 @@
-import { apiLogin, apiRegister } from '@/api/auth'
+import { apiLogin, apiRegister, apiLogout, apiPing } from '@/api/auth'
 import type { LoginData, RegisterData } from '@/api/types'
 import router from '@/router'
 import { useUserStore } from '@/stores/user'
@@ -37,11 +37,25 @@ export const useAuth = () => {
       ElMessage.error('Please check the form for errors')
     }
   }
+
   const logout = async () => {
+    apiLogout()
     userStore.clearToken()
     ElMessage.success('Logged out successfully')
     router.push('/login')
   }
 
-  return { register, login, logout }
+  const ping = async () => {
+    try {
+      const res = await apiPing()
+      if (res.data) {
+        ElMessage.success(res.data)
+      }
+    } catch (error) {
+      console.error(error)
+      ElMessage.error('Error!')
+    }
+  }
+
+  return { register, login, logout, ping }
 }
