@@ -42,7 +42,7 @@ export const useAuth = () => {
     apiLogout()
     userStore.clearToken()
     ElMessage.success('Logged out successfully')
-    router.push('/login')
+    router.push('/')
   }
 
   const ping = async () => {

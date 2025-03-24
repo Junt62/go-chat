@@ -14,11 +14,12 @@
       <el-menu-item index="4">设置</el-menu-item>
     </el-menu> -->
     <div class="right-tools">
-      <el-input v-model="search" placeholder="搜索..." class="search-box">
+      <p>{{ userStore.username }}</p>
+      <!-- <el-input v-model="search" placeholder="搜索..." class="search-box">
         <template #prefix
           ><el-icon><Search /></el-icon
         ></template>
-      </el-input>
+      </el-input> -->
       <el-switch v-model="darkMode" class="dark-mode-switch" @change="toggleDarkMode">
         <template #active-action
           ><el-icon><Moon /></el-icon
@@ -35,10 +36,12 @@
 import { ref } from 'vue'
 import { Search, Moon, Sunny } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const search = ref<string>('')
 const darkMode = ref<boolean>(false)
 const router = useRouter()
+const userStore = useUserStore()
 
 const toggleDarkMode = (): void => {
   darkMode.value = !darkMode.value
