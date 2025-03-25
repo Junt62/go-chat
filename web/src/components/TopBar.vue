@@ -3,7 +3,7 @@
   <el-header class="top-bar">
     <div class="logo" @click="goHome">Go-Chat</div>
     <div class="right-tools">
-      <el-button type="primary" round class="main-btn" @click="join">立即体验</el-button>
+      <el-button type="primary" round class="join-btn" @click="join">立即体验</el-button>
     </div>
   </el-header>
 </template>
@@ -45,14 +45,14 @@ const join = () => {
   align-items: center;
   gap: 15px;
 }
-.main-btn {
+.join-btn {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   font-size: 1rem;
   padding: 12px 24px;
   transition: all 0.3s;
 }
-.main-btn:hover {
+.join-btn:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 </style>

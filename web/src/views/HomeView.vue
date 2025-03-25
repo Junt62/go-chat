@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    <TopBar />
     <div class="intro-container">
       <div class="content">
         <h1>Go-Chat 在线聊天室</h1>
@@ -11,13 +10,13 @@
             {{ item.text }}
           </el-col>
         </el-row>
+        <el-button type="primary" round class="join-btn" @click="join">立即体验</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import TopBar from '@/components/TopBar.vue'
 import { Refresh, User, Check, Edit, Grid, UploadFilled } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 
@@ -31,6 +30,10 @@ const features = [
   { icon: Grid, text: '组件丰富' },
   { icon: UploadFilled, text: '云端部署' },
 ]
+
+const join = () => {
+  router.push('/chat')
+}
 </script>
 
 <style scoped>
@@ -62,5 +65,16 @@ const features = [
 .content {
   max-width: 600px;
   padding: 20px;
+}
+.join-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  margin-top: 48px;
+  transition: all 0.3s;
+}
+.join-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 </style>
