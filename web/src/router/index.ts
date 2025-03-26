@@ -1,11 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
+import HomeView from '@/views/HomeView.vue'
+import AboutView from '@/views/AboutView.vue'
 import ChatView from '@/views/ChatView.vue'
-import SettingView from '@/views/SettingView.vue'
+import ChatPage from '@/components/ChatPage.vue'
 import { useUserStore } from '@/stores/user'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import SettingsView from '@/views/SettingsView.vue'
+import DiscoveryView from '@/views/DiscoveryView.vue'
+import NewchatView from '@/views/NewchatView.vue'
+
+const routes = [
+  {
+    path: 'chat/:chatId',
+    component: ChatPage,
+    props: true,
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,20 +37,27 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView,
-    },
-    {
-      path: '/setting',
-      name: 'setting',
-      component: SettingView,
-      meta: { requiresAuth: true },
-    },
-    {
       path: '/chat',
       name: 'chat',
       component: ChatView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/newchat',
+      name: 'newchat',
+      component: NewchatView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/discovery',
+      name: 'discovery',
+      component: DiscoveryView,
+      meta: { requaresAuth: true },
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: SettingsView,
       meta: { requiresAuth: true },
     },
   ],
