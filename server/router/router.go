@@ -15,7 +15,7 @@ func SetupRouter(cfg config.Config) *gin.Engine {
 
 	// r.Use(middleware.LoggerMiddleware())
 
-	r.GET("/api/ping", middleware.AuthMiddleware(), handler.PingHandler)
+	r.GET("/api/ping", handler.PingHandler)
 
 	r.GET("/api/user/:id", handler.UserHandler)
 

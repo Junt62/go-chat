@@ -8,7 +8,6 @@
     @click="handleClick"
   >
     <el-popover
-      class="box-item"
       :title="title"
       :content="content"
       placement="right"

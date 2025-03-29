@@ -14,6 +14,7 @@
             :icon="SwitchButton"
             chatPath="/"
           />
+          <ServerState style="position: fixed; bottom: 0px" />
         </div>
       </el-col>
 
@@ -53,6 +54,7 @@ import { useAuth } from '@/composables/useAuth'
 import TopBar from '@/components/TopBar.vue'
 import PopoverIcon from '@/components/PopoverIcon.vue'
 import FunctionBar from '@/components/FunctionBar.vue'
+import ServerState from '@/components/ServerState.vue'
 
 const { logout } = useAuth()
 
