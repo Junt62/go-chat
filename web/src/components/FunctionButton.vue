@@ -1,7 +1,7 @@
 <template>
   <div
-    class="popover-icon"
-    :class="{ active: isActive || selectedPage === chatPath }"
+    class="function-button"
+    :class="{ active: isActive || selectedPage === path }"
     @mousedown="setActive"
     @mouseup="clearActive"
     @mouseleave="clearActive"
@@ -16,7 +16,7 @@
       :persistent="false"
     >
       <template #reference>
-        <div class="rectangle">
+        <div class="icon">
           <el-icon :size="28">
             <component :is="icon" />
           </el-icon>
@@ -34,7 +34,7 @@ const props = defineProps<{
   title: string
   content: string
   icon: any
-  chatPath: string
+  path: string
 }>()
 
 const router = useRouter()
@@ -50,13 +50,13 @@ const clearActive = () => {
   isActive.value = false
 }
 const handleClick = () => {
-  setSelectedPage(props.chatPath)
-  router.push(props.chatPath)
+  setSelectedPage(props.path)
+  router.push(props.path)
 }
 </script>
 
 <style scoped>
-.popover-icon {
+.function-button {
   display: flex;
   align-items: center;
   justify-items: center;
@@ -68,10 +68,10 @@ const handleClick = () => {
   transition: background-color 0.2s;
   cursor: pointer;
 }
-.popover-icon.active {
+.function-button.active {
   background-color: rgba(255, 255, 255, 0.5);
 }
-.popover-icon:not(.active) {
+.function-button:not(.active) {
   background-color: rgba(255, 255, 255, 0.15);
 }
 .custom-popover {
@@ -84,7 +84,7 @@ const handleClick = () => {
   background-color: transparent !important;
   color: white;
 }
-.rectangle {
+.icon {
   display: flex;
   align-items: center;
   justify-content: center;

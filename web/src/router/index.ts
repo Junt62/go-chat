@@ -8,7 +8,7 @@ import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import DiscoveryView from '@/views/DiscoveryView.vue'
-import NewchatView from '@/views/NewchatView.vue'
+import CreateView from '@/views/CreateView.vue'
 
 const routes = [
   {
@@ -43,9 +43,9 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: '/newchat',
-      name: 'newchat',
-      component: NewchatView,
+      path: '/create',
+      name: 'create',
+      component: CreateView,
       meta: { requiresAuth: true },
     },
     {

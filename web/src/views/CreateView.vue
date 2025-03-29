@@ -1,9 +1,14 @@
 <template>
-  <div class="chat-container">
+  <div class="create-container">
     <el-row>
       <FunctionBar />
 
-      <ChatList />
+      <el-col style="width: 240px; flex: 0 0 240px">
+        <div class="column-content content-2">
+          <i class="el-icon-star"></i>
+          <p>secend column</p>
+        </div>
+      </el-col>
 
       <el-col>
         <div class="column-content content-3">
@@ -16,12 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import ChatList from '@/components/ChatList.vue'
 import FunctionBar from '@/components/FunctionBar.vue'
 </script>
 
 <style scoped>
-.chat-container {
+.create-container {
   display: flex;
   justify-content: center;
   align-items: center;
