@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 
+const EXPIRATION_TIME = 20 * 60 * 60 * 1000
+
 export const useUserStore = defineStore('user', {
   state: () => ({
     token: localStorage.getItem('token') || '',
@@ -11,9 +13,9 @@ export const useUserStore = defineStore('user', {
   actions: {
     setToken(token: string, username: string) {
       const currentTime = new Date()
+      this.tokenSetTime = currentTime
       this.token = token
       this.username = username
-      this.tokenSetTime = currentTime
       localStorage.setItem('token', token)
       localStorage.setItem('tokenSetTime', currentTime.toISOString())
     },
@@ -32,8 +34,7 @@ export const useUserStore = defineStore('user', {
       const timestamp1 = this.tokenSetTime.getTime()
       const timestamp2 = currentTime.getTime()
       const timeDifference = timestamp2 - timestamp1
-      const expirationTime = 20 * 60 * 60 * 1000
-      return timeDifference > expirationTime
+      return timeDifference > EXPIRATION_TIME
     },
   },
 })

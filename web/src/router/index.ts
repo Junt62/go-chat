@@ -67,9 +67,9 @@ router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
 
   if (to.meta.requiresAuth && !userStore.token) {
-    if (!userStore.isTokenExpired()) {
-      next('/login')
-    }
+    next('/login')
+    // } else if (userStore.isTokenExpired()) {
+    //   next('/login')
   } else {
     next()
   }

@@ -1,31 +1,47 @@
 <template>
-  <div class="create-container">
-    <el-row>
-      <FunctionBar />
+  <el-container>
+    <IconBar />
 
-      <el-col style="width: 240px; flex: 0 0 240px">
-        <div class="column-content content-2">
-          <i class="el-icon-star"></i>
-          <p>secend column</p>
-        </div>
-      </el-col>
+    <MsgBtnGroup :sections="sections" />
 
-      <el-col>
-        <div class="column-content content-3">
-          <i class="el-icon-star"></i>
-          <p>third column</p>
-        </div>
-      </el-col>
-    </el-row>
-  </div>
+    <div class="content">创建一个新的聊天</div>
+  </el-container>
 </template>
 
 <script setup lang="ts">
-import FunctionBar from '@/components/FunctionBar.vue'
+import IconBar from '@/components/IconBtnGroup.vue'
+import MsgBtnGroup from '@/components/MsgBtnGroup.vue'
+import { User, Switch, Setting } from '@element-plus/icons-vue'
+
+let buttonIndex = 0
+
+const sections = [
+  {
+    title: '聊天',
+    buttons: [
+      { title: '在线列表', icon: Switch },
+      { title: '我的好友', icon: User },
+    ],
+  },
+  {
+    title: '进行中的聊天',
+    buttons: [
+      { title: '张三', icon: User },
+      { title: '李四', icon: User },
+      { title: '王五', icon: User },
+    ],
+  },
+].map((section) => ({
+  title: section.title,
+  buttons: section.buttons.map((button) => ({
+    ...button,
+    index: buttonIndex++,
+  })),
+}))
 </script>
 
 <style scoped>
-.create-container {
+.el-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,25 +51,16 @@ import FunctionBar from '@/components/FunctionBar.vue'
   position: fixed;
   top: 0;
   left: 0;
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
 }
-.el-row {
-  width: 100%;
-  flex-wrap: nowrap;
-}
-.column-content {
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-}
-.content-1 {
-  padding: 12px;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-.content-2 {
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.15);
-}
-.content-3 {
-  padding: 10px;
+  width: 100vw;
   background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 1.2rem;
 }
 </style>

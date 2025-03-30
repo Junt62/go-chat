@@ -1,37 +1,41 @@
 <template>
-  <el-col style="width: 240px; flex: 0 0 240px">
-    <div class="column-content">
-      <span class="title">聊天</span>
+  <el-aside width="240px">
+    <div class="content">
+      <div class="title">聊天</div>
+      <MessageButton title="在线列表" :icon="Switch" :is-active="activeButton === 0" @click="setActiveButton(0)" />
+      <MessageButton title="我的好友" :icon="User" :is-active="activeButton === 1" @click="setActiveButton(1)" />
+
       <el-divider title="divider" />
-      <ChatButton title="在线列表" content="查看在线用户" :icon="Switch" path="/chat/online" />
-      <ChatButton title="我的好友" content="查看好友列表" :icon="User" path="/chat/friend" />
-      <el-divider title="divider" />
-      <ChatButton title="张三" content="查看好友列表" :icon="User" path="/chat/zhangsan" />
-      <ChatButton title="李四" content="查看好友列表" :icon="User" path="/chat/lisi" />
-      <ChatButton title="王五" content="查看好友列表" :icon="User" path="/chat/wangwu" />
+
+      <div class="title">进行中的聊天</div>
+      <MessageButton title="张三" :icon="User" :is-active="activeButton === 2" @click="setActiveButton(2)" />
+      <MessageButton title="李四" :icon="User" :is-active="activeButton === 3" @click="setActiveButton(3)" />
+      <MessageButton title="王五" :icon="User" :is-active="activeButton === 4" @click="setActiveButton(4)" />
     </div>
-  </el-col>
+  </el-aside>
 </template>
 
 <script setup lang="ts">
 import { User, Switch, Setting } from '@element-plus/icons-vue'
-import ChatButton from '@/components/ChatButton.vue'
+import MessageButton from '@/components/MsgBtn.vue'
+import { ref } from 'vue'
+
+const activeButton = ref<number>(-1)
+
+const setActiveButton = (index: number) => {
+  activeButton.value = index
+}
 </script>
 
 <style scoped>
-.column-content {
+.content {
   height: 100vh;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .title {
-  font-size: 1.5rem;
-}
-.title2 {
-  font-size: 1rem;
-}
-.el-divider {
-  margin-top: 0px;
   margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.8);
 }
 </style>
