@@ -5,7 +5,7 @@
     <MsgBtnGroup :sections="sections" @button-click="handleButtonClick" />
 
     <div class="content">
-      <OnlinePage v-if="activeSection === 'online'" />
+      <OnlinePage v-if="activeSection === 'online'" :tableData="tableData" />
       <FriendPage v-else-if="activeSection === 'friend'" />
       <div v-else>选择一个好友来开始聊天</div>
     </div>
@@ -20,6 +20,30 @@ import { ElMessage } from 'element-plus'
 import OnlinePage from '@/components/OnlinePage.vue'
 import FriendPage from '@/components/FriendPage.vue'
 import { ref } from 'vue'
+import type { ShowUser } from '@/types/user'
+
+const tableData: ShowUser[] = [
+  {
+    avatar: '',
+    name: '123',
+  },
+  {
+    avatar: '',
+    name: '222',
+  },
+  {
+    avatar: '',
+    name: '333',
+  },
+  {
+    avatar: '',
+    name: '444',
+  },
+  {
+    avatar: '',
+    name: '555',
+  },
+]
 
 type SectionType = 'online' | 'friend' | 'chats' | null
 
@@ -82,7 +106,7 @@ const sections = [
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  /* padding: 10px; */
   font-size: 1.2rem;
 }
 </style>

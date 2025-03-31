@@ -5,6 +5,11 @@ export interface User {
   email: string
 }
 
+export interface ShowUser {
+  avatar: string
+  name: string
+}
+
 export interface NewUser {
   username: string
   password: string
