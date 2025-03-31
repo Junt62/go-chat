@@ -2,9 +2,13 @@
   <el-container>
     <IconBtnGroup />
 
-    <MsgBtnGroup :sections="sections" />
+    <MsgBtnGroup :sections="sections" @button-click="handleButtonClick" />
 
-    <div class="content">选择一个好友来开始聊天</div>
+    <div class="content">
+      <OnlinePage v-if="activeSection === 'online'" />
+      <FriendPage v-else-if="activeSection === 'friend'" />
+      <div v-else>选择一个好友来开始聊天</div>
+    </div>
   </el-container>
 </template>
 
@@ -13,6 +17,23 @@ import IconBtnGroup from '@/components/IconBtnGroup.vue'
 import MsgBtnGroup from '@/components/MsgBtnGroup.vue'
 import { User, Switch, Setting } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
+import OnlinePage from '@/components/OnlinePage.vue'
+import FriendPage from '@/components/FriendPage.vue'
+import { ref } from 'vue'
+
+type SectionType = 'online' | 'friend' | 'chats' | null
+
+const activeSection = ref<SectionType>(null)
+
+const handleButtonClick = (buttonTitle: string) => {
+  if (buttonTitle === '在线列表') {
+    activeSection.value = 'online'
+  } else if (buttonTitle === '我的好友') {
+    activeSection.value = 'friend'
+  } else {
+    activeSection.value = 'chats'
+  }
+}
 
 let buttonIndex = 0
 
@@ -35,8 +56,8 @@ const sections = [
 ].map((section) => ({
   title: section.title,
   buttons: section.buttons.map((button) => ({
-    ...button,
     index: buttonIndex++,
+    ...button,
   })),
 }))
 </script>

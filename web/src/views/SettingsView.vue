@@ -80,9 +80,9 @@ const sections = [
             : '时间未设置'
 
           if (useStore.isTokenExpired()) {
-            ElMessage.success('已过期：' + time)
+            ElMessage.error('已过期：' + time)
           } else {
-            ElMessage.error('未过期：' + time)
+            ElMessage.success('未过期：' + time)
           }
         },
       },

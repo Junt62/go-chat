@@ -39,12 +39,13 @@ const props = defineProps<{
 
 const activeButton = ref<number>(-1)
 
-const setActiveButton = (index: number) => {
-  activeButton.value = index
-}
+const emit = defineEmits(['button-click'])
 
 const handlerButtonClick = (button: Button) => {
-  setActiveButton(button.index)
+  activeButton.value = button.index
+
+  emit('button-click', button.title)
+
   if (button.handler) {
     button.handler()
   }

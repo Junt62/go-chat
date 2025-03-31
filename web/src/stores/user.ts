@@ -9,6 +9,15 @@ export const useUserStore = defineStore('user', {
     tokenSetTime: localStorage.getItem('tokenSetTime')
       ? new Date(localStorage.getItem('tokenSetTime') as string)
       : null,
+    onlineUsers: [
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+      { id: 3, name: 'Charlie' },
+    ],
+    friends: [
+      { id: 2, name: 'Bob' },
+      { id: 4, name: 'David' },
+    ],
   }),
   actions: {
     setToken(token: string, username: string) {
