@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import IconBar from '@/components/IconBtnGroup.vue'
-import MsgBtnGroup from '@/components/MsgBtnGroup.vue'
+import IconBar from '@/components/bars/SideBar.vue'
+import MsgBtnGroup from '@/components/bars/ChatBar.vue'
 import { useAuth } from '@/composables/useAuth'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'

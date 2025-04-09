@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import { ChatDotRound, Setting, CirclePlus, Compass } from '@element-plus/icons-vue'
-import IconBtn from '@/components/IconBtn.vue'
-import ServerState from '@/components/ServerState.vue'
+import IconBtn from '@/components/units/IconBtn.vue'
+import ServerState from '@/components/units/ServerState.vue'
 </script>
 
 <style scoped>

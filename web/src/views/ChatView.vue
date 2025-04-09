@@ -1,8 +1,8 @@
 <template>
   <el-container>
-    <IconBtnGroup />
+    <SideBar />
 
-    <MsgBtnGroup :sections="sections" @button-click="handleButtonClick" />
+    <ChatBar :sections="sections" @button-click="handleButtonClick" />
 
     <div class="content">
       <OnlinePage v-if="activeSection === 'online'" :tableData="tableData" />
@@ -13,12 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import IconBtnGroup from '@/components/IconBtnGroup.vue'
-import MsgBtnGroup from '@/components/MsgBtnGroup.vue'
+import SideBar from '@/components/bars/SideBar.vue'
+import ChatBar from '@/components/bars/ChatBar.vue'
 import { User, Switch, Setting } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
-import OnlinePage from '@/components/OnlinePage.vue'
-import FriendPage from '@/components/FriendPage.vue'
+import OnlinePage from '@/components/pages/OnlinePage.vue'
+import FriendPage from '@/components/pages/FriendPage.vue'
 import { ref } from 'vue'
 import type { ShowUser } from '@/types/user'
 
@@ -50,12 +50,16 @@ type SectionType = 'online' | 'friend' | 'chats' | null
 const activeSection = ref<SectionType>(null)
 
 const handleButtonClick = (buttonTitle: string) => {
-  if (buttonTitle === '在线列表') {
-    activeSection.value = 'online'
-  } else if (buttonTitle === '我的好友') {
-    activeSection.value = 'friend'
-  } else {
-    activeSection.value = 'chats'
+  switch (buttonTitle) {
+    case '在线列表':
+      activeSection.value = 'online'
+      break
+    case '我的好友':
+      activeSection.value = 'friend'
+      break
+    default:
+      activeSection.value = 'chats'
+      break
   }
 }
 

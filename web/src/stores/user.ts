@@ -13,6 +13,9 @@ export const useUserStore = defineStore('user', {
       { id: 1, name: 'Alice' },
       { id: 2, name: 'Bob' },
       { id: 3, name: 'Charlie' },
+      { id: 4, name: '2134' },
+      { id: 5, name: '4534' },
+      { id: 6, name: '2343' },
     ],
     friends: [
       { id: 2, name: 'Bob' },

@@ -11,14 +11,14 @@
           :is-active="activeButton === button.index"
           @click="handlerButtonClick(button)"
         />
-        <el-divider title="divider" />
+        <el-divider />
       </div>
     </div>
   </el-aside>
 </template>
 
 <script setup lang="ts">
-import MsgBtn from '@/components/MsgBtn.vue'
+import MsgBtn from '@/components/units/MsgBtn.vue'
 import { ref } from 'vue'
 
 interface Button {
