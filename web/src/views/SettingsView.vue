@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <IconBar />
+    <SideBar />
 
     <MsgBtnGroup :sections="sections" />
 
@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import IconBar from '@/components/bars/SideBar.vue'
-import MsgBtnGroup from '@/components/bars/ChatBar.vue'
+import SideBar from '@/components/Sidebar.vue'
+import MsgBtnGroup from '@/components/units/MsgBtnGroup.vue'
 import { useAuth } from '@/composables/useAuth'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'

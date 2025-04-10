@@ -3,9 +3,12 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { ElButton } from 'element-plus'
+import { RouterView } from 'vue-router'
 import { provide, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
+locale.value = 'zh'
 
 const selectedPage = ref('/chat')
 

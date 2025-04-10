@@ -1,6 +1,6 @@
 <template>
   <el-aside width="240px">
-    <div class="content">
+    <div class="msg-btn-group">
       <div v-for="section in sections" :key="section.title">
         <div v-if="section.title" class="title">{{ section.title }}</div>
         <MsgBtn
@@ -53,7 +53,7 @@ const handlerButtonClick = (button: Button) => {
 </script>
 
 <style scoped>
-.content {
+.msg-btn-group {
   height: 100vh;
   padding: 10px;
   overflow-y: auto;

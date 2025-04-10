@@ -3,22 +3,24 @@ import type { LoginData, RegisterData } from '@/api/types'
 import router from '@/router'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
 export const useAuth = () => {
   const userStore = useUserStore()
+  const { t } = useI18n()
 
   const register = async (data: RegisterData) => {
     try {
       const response = await apiRegister(data)
 
       if (response.status === 200) {
-        ElMessage.success('Sign up successful')
+        ElMessage.success(t('RegisterSuccess'))
         router.push('/login')
       } else {
-        ElMessage.error('Sign up failed, please try again')
+        ElMessage.error(t('RegisterFailed'))
       }
     } catch (error) {
-      ElMessage.error('Please check the form for errors')
+      ElMessage.error(t('RegisterErrorAuth'))
     }
   }
 
@@ -28,20 +30,20 @@ export const useAuth = () => {
 
       if (response.data.token) {
         userStore.setToken(response.data.token, data.username)
-        ElMessage.success('Login successful')
+        ElMessage.success(t('LoginSuccess'))
         router.push('/chat')
       } else {
-        ElMessage.error('Incorrect username or password. Please try again.')
+        ElMessage.error(t('LoginFailed'))
       }
     } catch (error) {
-      ElMessage.error('Please check the form for errors')
+      ElMessage.error(t('LoginErrorAuth'))
     }
   }
 
   const logout = async () => {
     apiLogout()
     userStore.clearToken()
-    ElMessage.success('Logged out successfully')
+    ElMessage.success(t('LogoutSuccess'))
     router.push('/')
   }
 
@@ -53,7 +55,7 @@ export const useAuth = () => {
       }
     } catch (error) {
       console.error(error)
-      ElMessage.error('Error!')
+      ElMessage.error(t('Error'))
     }
   }
 

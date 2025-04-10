@@ -1,5 +1,5 @@
 <template>
-  <div class="message-button" :class="{ active: isActive }">
+  <div class="msg-btn" :class="{ active: isActive }">
     <component class="icon" :is="icon" />
     <div class="content">{{ title }}</div>
   </div>
@@ -16,7 +16,7 @@ defineProps<{
 </script>
 
 <style scoped>
-.message-button {
+.msg-btn {
   display: flex;
   align-items: center;
   justify-items: center;
@@ -27,13 +27,13 @@ defineProps<{
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
-.message-button:hover {
+.msg-btn:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-.message-button:active {
+.msg-btn:active {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.message-button.active {
+.msg-btn.active {
   background-color: rgba(255, 255, 255, 0.2);
 }
 .icon {

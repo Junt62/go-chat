@@ -1,10 +1,10 @@
 <template>
-  <div class="user-list">
-    <div class="section-title">在线用户</div>
+  <div class="online-page">
+    <div class="title">在线用户：{{ onlineUsers.length }} 人</div>
     <ul>
-      <li v-for="user in onlineUsers" :key="user.id" class="user-item">
+      <div v-for="user in onlineUsers" :key="user.id" class="user-item">
         {{ user.name }}
-      </li>
+      </div>
     </ul>
   </div>
 </template>
@@ -21,11 +21,12 @@ defineProps<{ tableData: ShowUser[] }>()
 </script>
 
 <style scoped>
-.user-list {
-  padding: 20px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 8px;
+.online-page {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 .section-title {

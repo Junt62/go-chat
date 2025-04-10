@@ -1,5 +1,5 @@
 <template>
-  <div class="icon-button" :class="{ active: isActive }" @click="handleClick">
+  <div class="icon-btn" :class="{ active: isActive }" @click="handleClick">
     <el-popover :title="title" :content="content" placement="right" :hide-after="0" :persistent="false">
       <template #reference>
         <div class="icon">
@@ -35,7 +35,7 @@ const handleClick = () => {
 </script>
 
 <style scoped>
-.icon-button {
+.icon-btn {
   display: flex;
   align-items: center;
   justify-items: center;
@@ -43,17 +43,18 @@ const handleClick = () => {
   height: 56px;
   border-radius: 24px;
   margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.8);
   background-color: rgba(255, 255, 255, 0.1);
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
-.icon-button:hover {
+.icon-btn:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
-.icon-button:active {
+.icon-btn:active {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.icon-button.active {
+.icon-btn.active {
   background-color: rgba(255, 255, 255, 0.3);
 }
 .icon {

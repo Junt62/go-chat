@@ -5,20 +5,20 @@
     <el-card class="login-card">
       <template #header>
         <div class="card-header">
-          <span>Go-Chat: Sign In</span>
+          {{ $t('SignInTitle') }}
         </div>
       </template>
 
       <el-form ref="loginDataRef" :model="loginData" :rules="rules" label-width="80px">
-        <el-form-item label="Username" prop="username">
+        <el-form-item :label="$t('Username')" prop="username">
           <el-input v-model="loginData.username" />
         </el-form-item>
-        <el-form-item label="Password" prop="password">
+        <el-form-item :label="$t('Password')" prop="password">
           <el-input v-model="loginData.password" type="password" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleLogin">Sign In</el-button>
-          <el-button type="info" @click="goToRegister">No account？Sign Up</el-button>
+          <el-button type="primary" @click="handleLogin">{{ $t('SignIn') }}</el-button>
+          <el-button type="info" @click="goToRegister">{{ $t('NoAccountGoSignUp') }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -34,8 +34,10 @@ import type { FormRules, FormInstance } from 'element-plus'
 import type { LoginData } from '@/api/types'
 import { useAuth } from '@/composables/useAuth'
 import TopBar from '@/components/TopBar.vue'
+import { useI18n } from 'vue-i18n'
 
 const { login } = useAuth()
+const { t } = useI18n()
 
 const router = useRouter()
 
@@ -46,12 +48,12 @@ const loginData = reactive<LoginData>({
 })
 const rules = reactive<FormRules<LoginData>>({
   username: [
-    { required: true, message: 'Please enter your username', trigger: 'blur' },
-    { min: 3, message: 'Username must be at least 3 characters', trigger: 'blur' },
+    { required: true, message: t('UsernameRequireMsg'), trigger: 'blur' },
+    { min: 3, message: t('UsernameMinMsg'), trigger: 'blur' },
   ],
   password: [
-    { required: true, message: 'Please enter your password', trigger: 'blur' },
-    { min: 6, message: 'Password must be at least 6 characters', trigger: 'blur' },
+    { required: true, message: t('PasswordRequireMsg'), trigger: 'blur' },
+    { min: 6, message: t('PasswordMinMsg'), trigger: 'blur' },
   ],
 })
 
@@ -61,7 +63,7 @@ const handleLogin = async () => {
     await loginDataRef.value.validate()
     await login(loginData)
   } catch (error) {
-    ElMessage.error('Please correct the errors before submitting')
+    ElMessage.error(t('LoginError'))
   }
 }
 const goToRegister = async () => {

@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <SideBar />
+    <Sidebar />
 
     <ChatBar :sections="sections" @button-click="handleButtonClick" />
 
@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import SideBar from '@/components/bars/SideBar.vue'
-import ChatBar from '@/components/bars/ChatBar.vue'
+import Sidebar from '@/components/Sidebar.vue'
+import ChatBar from '@/components/units/MsgBtnGroup.vue'
 import { User, Switch, Setting } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import OnlinePage from '@/components/pages/OnlinePage.vue'
